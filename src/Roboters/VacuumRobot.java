@@ -10,69 +10,65 @@ public class VacuumRobot extends  Robot{
     }
 
     public String toString(){
-        return super.toString() + "It has cleaned " + totalUnitsCleaned + " units so far";
+        return super.toString() + "It has cleaned " + totalUnitsCleaned + " units so far.";
     }
 
     public VacuumRobot(char direction, int xLocation, int yLocation) {
         super("Vacuum", direction, xLocation, yLocation);
     }
 
-    ArrayList<Integer> xVisited = new ArrayList<>();
-    ArrayList<Integer> yVisited = new ArrayList<>();
-
-    boolean xUnique;
-    boolean yUnique;
-
 
     public void move(int steps){
         if(getDirection() == 'N'){
-            setYLocation(getYLocation()+steps);
-            unique();
+            for(int i = 0; i < steps; i++){
+                setYLocation(getYLocation()+1);
+                unique();
+            }
         }else if(getDirection() == 'W'){
-            setXLocation(getXLocation()-steps);
-            unique();
+            for(int i = 0; i < steps; i++){
+                setXLocation(getXLocation()-1);
+                unique();
+            }
         }else if(getDirection() == 'E'){
-            setXLocation(getXLocation()+steps);
-            unique();
+            for(int i = 0; i < steps; i++){
+                setXLocation(getXLocation()+1);
+                unique();
+            }
         }else if(getDirection() == 'S'){
-            setYLocation(getYLocation()-steps);
-            unique();
+            for(int i = 0; i < steps; i++){
+                setYLocation(getYLocation()-1);
+                unique();
+            }
         }
 
     }
 
-    void unique(){
-        for(int x: xVisited){
-            if(getXLocation() != x){
-                xUnique = true;
-            }else {
-                xUnique = false;
+
+    ArrayList<Point> visited = new ArrayList<>();
+    boolean unique = true;
+
+    Point point;
+
+    void unique() {
+
+        point = new Point(getXLocation(), getYLocation());
+
+        for(Point area : visited){
+            if(!(point.x == area.x && point.y == area.y)){
+                unique = true;
+            }else{
+                unique = false;
                 break;
             }
         }
 
-        for(int y: yVisited){
-            if(getYLocation() != y){
-                yUnique = true;
-            }else {
-                yUnique = false;
-                break;
-            }
-        }
-
-        if(xUnique){
-            xVisited.add(getXLocation());
-        }
-        if(yUnique){
-            yVisited.add(getYLocation());
-        }
-
-        if(xUnique || yUnique){
+        if(unique){
+            visited.add(new Point(getXLocation(), getYLocation()));
             totalUnitsCleaned++;
         }
 
-        xUnique = false;
-        yUnique = false;
+        unique = false;
+
     }
 
 }
