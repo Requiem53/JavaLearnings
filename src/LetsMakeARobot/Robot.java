@@ -1,4 +1,4 @@
-package Roboters;
+package LetsMakeARobot;
 
 public class Robot {
 

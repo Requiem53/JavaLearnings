@@ -1,4 +1,4 @@
-package Roboters;
+package LetsMakeARobot;
 import java.util.Scanner;
 
 public class Main {
