@@ -4,7 +4,7 @@ import java.lang.Math;
 
 public class CarRobot extends Robot{
 
-    double calculateSeconds(int x, int y){
+    public double calculateSeconds(int x, int y){
         double ans;
         ans = Math.sqrt((x*x) + (y*y));
         return ans;
